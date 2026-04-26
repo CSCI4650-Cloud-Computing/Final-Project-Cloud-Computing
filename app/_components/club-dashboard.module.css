@@ -1,0 +1,464 @@
+.shell {
+  width: min(1600px, calc(100vw - 48px));
+  margin: 0 auto;
+  padding: 36px 0 54px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 24px;
+  padding: 34px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.22), transparent 42%),
+    radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.2), transparent 38%),
+    linear-gradient(135deg, rgba(250, 248, 240, 0.96), rgba(245, 252, 250, 0.96));
+  box-shadow: 0 24px 80px rgba(7, 24, 23, 0.1);
+}
+
+.heroText h1 {
+  max-width: 12ch;
+  margin: 10px 0 18px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5vw, 5.6rem);
+  line-height: 0.92;
+  color: #0f172a;
+}
+
+.kicker,
+.panelEyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0f766e;
+}
+
+.heroCopy,
+.balanceCaption,
+.memberCardBody p,
+.profileMeta,
+.notesStrip p,
+.paymentRow p,
+.emptyCopy,
+.emptyState p,
+.emptyStateTall p,
+.statTile span,
+.infoItem span {
+  margin: 0;
+  color: #4b5563;
+}
+
+.heroCopy {
+  max-width: 62ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-self: stretch;
+}
+
+.statTile {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.statTile strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #111827;
+}
+
+.controlBand,
+.workspace {
+  margin-top: 22px;
+}
+
+.controlBand {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) 240px auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.searchField,
+.filterField,
+.paymentForm label,
+.editorForm label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.searchField span,
+.filterField span,
+.paymentForm span,
+.editorForm span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #334155;
+}
+
+.searchField input,
+.filterField select,
+.paymentForm input,
+.paymentForm select,
+.editorForm input,
+.editorForm select,
+.editorForm textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 12px 14px;
+  font: inherit;
+  color: #0f172a;
+}
+
+.editorForm textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.controlActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.controlActions button,
+.controlActions a,
+.quickActions a,
+.quickActions button,
+.paymentForm button,
+.editorForm button,
+.destructiveButton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  padding: 0 16px;
+  background: #0f766e;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.controlActions a,
+.quickActions a,
+.secondaryButton {
+  background: white;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+}
+
+.controlActions button:hover,
+.controlActions a:hover,
+.quickActions a:hover,
+.quickActions button:hover,
+.paymentForm button:hover,
+.editorForm button:hover,
+.destructiveButton:hover {
+  transform: translateY(-1px);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 0.92fr 1.12fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.rosterPanel,
+.detailPanel,
+.editorPanel {
+  min-width: 0;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+}
+
+.rosterPanel,
+.detailPanel,
+.editorPanel,
+.paymentSection,
+.notesStrip {
+  padding: 22px;
+}
+
+.panelHeader,
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.panelHeader h2,
+.detailPanel h2,
+.editorPanel h2,
+.paymentSection h3 {
+  margin: 8px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  line-height: 1.05;
+  color: #0f172a;
+}
+
+.memberList {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.memberCard,
+.memberCardSelected {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 14px;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fcfcf8;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.memberCardSelected {
+  border-color: rgba(15, 118, 110, 0.45);
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95), rgba(255, 247, 237, 0.98));
+  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.12);
+}
+
+.memberCard:hover,
+.memberCardSelected:hover {
+  transform: translateY(-2px);
+}
+
+.avatar,
+.profilePhoto {
+  width: 64px;
+  height: 74px;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.profilePhoto {
+  width: 132px;
+  height: 152px;
+}
+
+.memberCardHead {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.memberCardHead h3,
+.paymentRow strong,
+.infoItem strong {
+  margin: 0;
+  color: #0f172a;
+}
+
+.memberCardHead span {
+  padding: 5px 8px;
+  background: #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.memberCardHead span[data-status="ACTIVE"] {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.memberCardHead span[data-status="PENDING"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.memberCardHead span[data-status="LAPSED"] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.quickActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.infoItem {
+  display: flex;
+  min-height: 92px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fcfcf8;
+}
+
+.notesStrip {
+  margin-top: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(135deg, rgba(240, 253, 250, 0.95), rgba(255, 251, 235, 0.95));
+}
+
+.paymentSection {
+  margin-top: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f9faf7;
+}
+
+.paymentHistory {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.paymentRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: white;
+}
+
+.paymentAmount {
+  text-align: right;
+}
+
+.paymentForm,
+.editorForm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.editorForm {
+  margin-top: 20px;
+}
+
+.wideField,
+.formActions {
+  grid-column: 1 / -1;
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.secondaryButton {
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.destructiveButton {
+  background: #b91c1c;
+}
+
+.emptyState,
+.emptyStateTall {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  padding: 26px;
+  border: 1px dashed rgba(15, 23, 42, 0.16);
+  text-align: center;
+}
+
+.emptyStateTall {
+  min-height: 420px;
+}
+
+@media (max-width: 1240px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .controlBand,
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100vw - 28px, 1600px);
+    padding-top: 24px;
+  }
+
+  .heroText h1 {
+    max-width: 100%;
+    font-size: clamp(2.5rem, 15vw, 4rem);
+  }
+
+  .hero,
+  .rosterPanel,
+  .detailPanel,
+  .editorPanel,
+  .paymentSection,
+  .notesStrip {
+    padding: 18px;
+  }
+
+  .heroStats,
+  .profileGrid,
+  .paymentForm,
+  .editorForm {
+    grid-template-columns: 1fr;
+  }
+
+  .profileHeader,
+  .panelHeader,
+  .controlActions,
+  .quickActions,
+  .paymentRow,
+  .formActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profilePhoto {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+}

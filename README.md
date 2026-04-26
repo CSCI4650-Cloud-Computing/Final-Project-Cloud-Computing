@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClubHub
 
-## Getting Started
+ClubHub is a university club system management app built with Next.js App Router, Prisma, and SQLite. It provides:
 
-First, run the development server:
+- Student membership CRUD
+- Search and status filtering
+- Payment and dues tracking
+- Student profile photos
+- CSV and JSON export
+- Print-friendly output
+- Email handoff via `mailto:` summaries
+
+## Stack
+
+- Next.js 16 App Router
+- React 19
+- Prisma ORM
+- SQLite
+- Tailwind CSS 4 for base tooling, with custom CSS modules for the interface
+
+## Local setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a local environment file:
+
+```bash
+copy .env.example .env
+```
+
+3. Generate the Prisma client and create the SQLite database:
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+Prisma 7 reads the datasource URL from [prisma.config.ts](/D:/@risFolio/Education/UNO/Fall%202026/26SP%20CSCI4650-850Intro%20To%20Cloud%20Computing/Assignments/Group%20Project/finalproject/prisma.config.ts) and uses the SQLite driver adapter configured in [lib/prisma.ts](/D:/@risFolio/Education/UNO/Fall%202026/26SP%20CSCI4650-850Intro%20To%20Cloud%20Computing/Assignments/Group%20Project/finalproject/lib/prisma.ts).
+
+4. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- The app auto-seeds a realistic sample club roster the first time the database is empty.
+- Export all members with `/api/export`.
+- Export a single student with `/api/export?studentId=<id>`.
+- Retrieve JSON instead of CSV with `/api/export?format=json`.
 
-## Learn More
+## AWS direction
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is currently configured with SQLite for local and classroom use. For AWS deployment later, the Next.js app structure and Prisma usage can be kept while changing the Prisma datasource to a managed database such as Amazon RDS.

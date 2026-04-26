@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum MembershipStatus {
+  ACTIVE
+  PENDING
+  LAPSED
+  ALUMNI
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  TRANSFER
+  ONLINE
+  CHECK
+}
+
+model StudentMember {
+  id                    String           @id @default(cuid())
+  studentId             String           @unique
+  firstName             String
+  lastName              String
+  preferredName         String?
+  email                 String           @unique
+  phone                 String
+  dateOfBirth           DateTime?
+  gender                String?
+  major                 String
+  minor                 String?
+  department            String
+  college               String
+  yearLevel             String
+  graduationTerm        String?
+  enrollmentStatus      String
+  addressLine1          String
+  addressLine2          String?
+  city                  String
+  state                 String
+  postalCode            String
+  emergencyContactName  String
+  emergencyContactPhone String
+  guardianName          String?
+  guardianPhone         String?
+  membershipStatus      MembershipStatus @default(PENDING)
+  annualFee             Int              @default(75)
+  notes                 String?
+  photoUrl              String
+  joinedAt              DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+  payments              Payment[]
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  studentPk  String
+  periodLabel String
+  amount     Int
+  paidAt     DateTime      @default(now())
+  method     PaymentMethod @default(ONLINE)
+  reference  String?
+  note       String?
+  student    StudentMember @relation(fields: [studentPk], references: [id], onDelete: Cascade)
+}
