@@ -1,35 +1,79 @@
 .shell {
-  width: min(1600px, calc(100vw - 48px));
+  width: min(1360px, calc(100vw - 40px));
   margin: 0 auto;
-  padding: 36px 0 54px;
+  padding: 28px 0 44px;
+}
+
+.hero,
+.controlBand,
+.rosterPanel,
+.detailPanel,
+.editorPanel,
+.paymentSection,
+.notesStrip {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
-  gap: 24px;
-  padding: 34px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.95fr);
+  gap: 22px;
+  padding: 28px;
   background:
-    radial-gradient(circle at top left, rgba(45, 212, 191, 0.22), transparent 42%),
-    radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.2), transparent 38%),
-    linear-gradient(135deg, rgba(250, 248, 240, 0.96), rgba(245, 252, 250, 0.96));
-  box-shadow: 0 24px 80px rgba(7, 24, 23, 0.1);
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.18), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(250, 248, 240, 0.97), rgba(245, 252, 250, 0.97));
+}
+
+.heroText {
+  display: grid;
+  align-content: start;
+  gap: 14px;
 }
 
 .heroText h1 {
-  max-width: 12ch;
-  margin: 10px 0 18px;
+  max-width: 11ch;
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 5vw, 5.6rem);
-  line-height: 0.92;
+  font-size: clamp(2.35rem, 4vw, 4.3rem);
+  line-height: 0.96;
   color: #0f172a;
+}
+
+.heroAside {
+  display: grid;
+  gap: 14px;
+}
+
+.heroBrief {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.heroBrief h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.heroBrief p:last-child {
+  margin: 0;
+  line-height: 1.55;
+  color: #4b5563;
 }
 
 .kicker,
 .panelEyebrow {
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -52,31 +96,31 @@
 }
 
 .heroCopy {
-  max-width: 62ch;
-  font-size: 1.02rem;
-  line-height: 1.7;
+  max-width: 58ch;
+  font-size: 0.98rem;
+  line-height: 1.65;
 }
 
 .heroStats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  align-self: stretch;
+  gap: 12px;
 }
 
 .statTile {
   display: flex;
-  min-height: 150px;
+  min-height: 108px;
   flex-direction: column;
   justify-content: space-between;
-  padding: 18px;
+  padding: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.84);
 }
 
 .statTile strong {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-size: clamp(1.45rem, 2vw, 2.15rem);
   font-weight: 600;
   line-height: 1;
   color: #111827;
@@ -84,14 +128,15 @@
 
 .controlBand,
 .workspace {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .controlBand {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) 240px auto;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1.25fr) 220px auto;
+  gap: 14px;
   align-items: end;
+  padding: 18px;
 }
 
 .searchField,
@@ -108,7 +153,7 @@
 .filterField span,
 .paymentForm span,
 .editorForm span {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -123,16 +168,29 @@
 .editorForm select,
 .editorForm textarea {
   width: 100%;
-  min-height: 48px;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.92);
-  padding: 12px 14px;
+  min-height: 44px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 11px 13px;
   font: inherit;
   color: #0f172a;
 }
 
+.searchField input:focus,
+.filterField select:focus,
+.paymentForm input:focus,
+.paymentForm select:focus,
+.editorForm input:focus,
+.editorForm select:focus,
+.editorForm textarea:focus {
+  outline: none;
+  border-color: rgba(15, 118, 110, 0.5);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.08);
+}
+
 .editorForm textarea {
-  min-height: 132px;
+  min-height: 122px;
   resize: vertical;
 }
 
@@ -151,11 +209,12 @@
 .editorForm button,
 .destructiveButton {
   display: inline-flex;
-  min-height: 48px;
+  min-height: 42px;
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
-  padding: 0 16px;
+  border-radius: 8px;
+  padding: 0 14px;
   background: #0f766e;
   color: white;
   font: inherit;
@@ -185,18 +244,9 @@
 
 .workspace {
   display: grid;
-  grid-template-columns: 0.92fr 1.12fr 1fr;
+  grid-template-columns: 320px minmax(0, 1fr) 360px;
   gap: 18px;
   align-items: start;
-}
-
-.rosterPanel,
-.detailPanel,
-.editorPanel {
-  min-width: 0;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
 }
 
 .rosterPanel,
@@ -204,14 +254,24 @@
 .editorPanel,
 .paymentSection,
 .notesStrip {
-  padding: 22px;
+  padding: 18px;
+}
+
+.rosterPanel,
+.editorPanel {
+  position: sticky;
+  top: 18px;
+}
+
+.detailPanel {
+  min-width: 0;
 }
 
 .panelHeader,
 .profileHeader {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   align-items: flex-start;
 }
 
@@ -219,27 +279,31 @@
 .detailPanel h2,
 .editorPanel h2,
 .paymentSection h3 {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.8rem;
-  line-height: 1.05;
+  font-size: 1.45rem;
+  line-height: 1.1;
   color: #0f172a;
 }
 
 .memberList {
   display: grid;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 18px;
+  max-height: calc(100vh - 190px);
+  overflow: auto;
+  padding-right: 2px;
 }
 
 .memberCard,
 .memberCardSelected {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
   background: #fcfcf8;
   text-align: left;
   cursor: pointer;
@@ -247,32 +311,36 @@
 }
 
 .memberCardSelected {
-  border-color: rgba(15, 118, 110, 0.45);
-  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95), rgba(255, 247, 237, 0.98));
-  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.12);
+  border-color: rgba(15, 118, 110, 0.38);
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.92), rgba(255, 247, 237, 0.96));
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.1);
 }
 
 .memberCard:hover,
 .memberCardSelected:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .avatar,
 .profilePhoto {
-  width: 64px;
-  height: 74px;
   object-fit: cover;
   background: #e5e7eb;
+  border-radius: 6px;
+}
+
+.avatar {
+  width: 56px;
+  height: 68px;
 }
 
 .profilePhoto {
-  width: 132px;
-  height: 152px;
+  width: 120px;
+  height: 140px;
 }
 
 .memberCardHead {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: space-between;
   align-items: start;
 }
@@ -284,10 +352,16 @@
   color: #0f172a;
 }
 
+.memberCardHead h3 {
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
 .memberCardHead span {
-  padding: 5px 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
   background: #f1f5f9;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #334155;
 }
@@ -310,43 +384,42 @@
 .quickActions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .profileGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 .infoItem {
   display: flex;
-  min-height: 92px;
+  min-height: 84px;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
   background: #fcfcf8;
 }
 
 .notesStrip {
-  margin-top: 18px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 16px;
   background: linear-gradient(135deg, rgba(240, 253, 250, 0.95), rgba(255, 251, 235, 0.95));
 }
 
 .paymentSection {
-  margin-top: 18px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  margin-top: 16px;
   background: #f9faf7;
 }
 
 .paymentHistory {
   display: grid;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 14px;
 }
 
 .paymentRow {
@@ -354,8 +427,9 @@
   justify-content: space-between;
   gap: 12px;
   align-items: center;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
   background: white;
 }
 
@@ -368,11 +442,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 18px;
-}
-
-.editorForm {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .wideField,
@@ -399,18 +469,29 @@
   display: grid;
   place-items: center;
   min-height: 180px;
-  padding: 26px;
+  padding: 24px;
   border: 1px dashed rgba(15, 23, 42, 0.16);
+  border-radius: 8px;
   text-align: center;
 }
 
 .emptyStateTall {
-  min-height: 420px;
+  min-height: 360px;
 }
 
 @media (max-width: 1240px) {
   .workspace {
     grid-template-columns: 1fr;
+  }
+
+  .rosterPanel,
+  .editorPanel {
+    position: static;
+  }
+
+  .memberList {
+    max-height: none;
+    overflow: visible;
   }
 
   .controlBand,
@@ -421,22 +502,23 @@
 
 @media (max-width: 720px) {
   .shell {
-    width: min(100vw - 28px, 1600px);
-    padding-top: 24px;
+    width: min(100vw - 24px, 1360px);
+    padding-top: 20px;
   }
 
   .heroText h1 {
     max-width: 100%;
-    font-size: clamp(2.5rem, 15vw, 4rem);
+    font-size: clamp(2.1rem, 12vw, 3.2rem);
   }
 
   .hero,
+  .controlBand,
   .rosterPanel,
   .detailPanel,
   .editorPanel,
   .paymentSection,
   .notesStrip {
-    padding: 18px;
+    padding: 16px;
   }
 
   .heroStats,

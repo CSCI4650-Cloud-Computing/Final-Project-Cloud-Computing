@@ -9,10 +9,7 @@ import {
   recordPayment,
   updateStudentMember,
 } from "@/app/actions";
-import {
-  type DashboardStats,
-  type DashboardStudent,
-} from "@/lib/club-data";
+import { type DashboardStats, type DashboardStudent } from "@/lib/club-data";
 import { buildEmailSummary, formatCurrency } from "@/lib/club-utils";
 
 import styles from "./club-dashboard.module.css";
@@ -79,11 +76,23 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
             and track dues without losing the human context behind each student.
           </p>
         </div>
-        <div className={styles.heroStats}>
-          <StatTile label="Members" value={String(stats.totalMembers)} />
-          <StatTile label="Active" value={String(stats.activeMembers)} />
-          <StatTile label="Pending" value={String(stats.pendingMembers)} />
-          <StatTile label="Collected" value={formatCurrency(stats.totalCollected)} />
+
+        <div className={styles.heroAside}>
+          <div className={styles.heroBrief}>
+            <p className={styles.panelEyebrow}>Operations snapshot</p>
+            <h2>Everything officers need for one clean meeting workflow.</h2>
+            <p>
+              Review the live roster, track payments, and update member records
+              without scattered panels or oversized sections.
+            </p>
+          </div>
+
+          <div className={styles.heroStats}>
+            <StatTile label="Members" value={String(stats.totalMembers)} />
+            <StatTile label="Active" value={String(stats.activeMembers)} />
+            <StatTile label="Pending" value={String(stats.pendingMembers)} />
+            <StatTile label="Collected" value={formatCurrency(stats.totalCollected)} />
+          </div>
         </div>
       </section>
 
@@ -101,9 +110,7 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
           <span>Status</span>
           <select
             value={statusFilter}
-            onChange={(event) =>
-              setStatusFilter(event.target.value as StatusFilter)
-            }
+            onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}
           >
             <option value="ALL">All statuses</option>
             {statusOptions.map((status) => (
@@ -154,11 +161,12 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                   <Image
                     src={student.photoUrl}
                     alt={student.fullName}
-                    width={64}
-                    height={74}
+                    width={56}
+                    height={68}
                     unoptimized
                     className={styles.avatar}
                   />
+
                   <div className={styles.memberCardBody}>
                     <div className={styles.memberCardHead}>
                       <h3>{student.fullName}</h3>
@@ -168,7 +176,7 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                     </div>
                     <p>{student.major}</p>
                     <p>
-                      {student.studentId} · {student.yearLevel}
+                      {student.studentId} - {student.yearLevel}
                     </p>
                   </div>
                 </button>
@@ -191,16 +199,17 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                 <Image
                   src={selectedMember.photoUrl}
                   alt={selectedMember.fullName}
-                  width={132}
-                  height={152}
+                  width={120}
+                  height={140}
                   unoptimized
                   className={styles.profilePhoto}
                 />
+
                 <div>
                   <p className={styles.panelEyebrow}>Student profile</p>
                   <h2>{selectedMember.fullName}</h2>
                   <p className={styles.profileMeta}>
-                    {selectedMember.studentId} · {selectedMember.department}
+                    {selectedMember.studentId} - {selectedMember.department}
                   </p>
                   <div className={styles.quickActions}>
                     <a href={exportHref}>Export student</a>
@@ -219,7 +228,14 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                 <InfoItem label="Date of birth" value={selectedMember.dateOfBirth ?? "Not set"} />
                 <InfoItem label="Gender" value={selectedMember.gender ?? "Not set"} />
                 <InfoItem label="College" value={selectedMember.college} />
-                <InfoItem label="Major / Minor" value={selectedMember.minor ? `${selectedMember.major} / ${selectedMember.minor}` : selectedMember.major} />
+                <InfoItem
+                  label="Major / Minor"
+                  value={
+                    selectedMember.minor
+                      ? `${selectedMember.major} / ${selectedMember.minor}`
+                      : selectedMember.major
+                  }
+                />
                 <InfoItem label="Graduation" value={selectedMember.graduationTerm ?? "Not set"} />
                 <InfoItem
                   label="Address"
@@ -227,11 +243,11 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                 />
                 <InfoItem
                   label="Emergency contact"
-                  value={`${selectedMember.emergencyContactName} · ${selectedMember.emergencyContactPhone}`}
+                  value={`${selectedMember.emergencyContactName} - ${selectedMember.emergencyContactPhone}`}
                 />
                 <InfoItem
                   label="Membership"
-                  value={`${selectedMember.membershipStatus} · joined ${selectedMember.joinedAt.slice(0, 10)}`}
+                  value={`${selectedMember.membershipStatus} - joined ${selectedMember.joinedAt.slice(0, 10)}`}
                 />
                 <InfoItem
                   label="Fees"
@@ -260,7 +276,7 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
                       <div>
                         <strong>{payment.periodLabel}</strong>
                         <p>
-                          {payment.paidAt.slice(0, 10)} · {payment.method}
+                          {payment.paidAt.slice(0, 10)} - {payment.method}
                         </p>
                       </div>
                       <div className={styles.paymentAmount}>
@@ -325,6 +341,7 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
               <p className={styles.panelEyebrow}>Record editor</p>
               <h2>{editorMode === "create" ? "Add new member" : "Update member"}</h2>
             </div>
+
             {editorMode === "edit" && selectedMember ? (
               <form
                 action={deleteStudentMember}
@@ -393,17 +410,9 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
               type="date"
               defaultValue={formMember?.dateOfBirth ?? ""}
             />
-            <FormField
-              label="Gender"
-              name="gender"
-              defaultValue={formMember?.gender ?? ""}
-            />
+            <FormField label="Gender" name="gender" defaultValue={formMember?.gender ?? ""} />
             <FormField label="Major" name="major" defaultValue={formMember?.major} required />
-            <FormField
-              label="Minor"
-              name="minor"
-              defaultValue={formMember?.minor ?? ""}
-            />
+            <FormField label="Minor" name="minor" defaultValue={formMember?.minor ?? ""} />
             <FormField
               label="Department"
               name="department"
