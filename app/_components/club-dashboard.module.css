@@ -2,6 +2,7 @@
   width: min(1360px, calc(100vw - 40px));
   margin: 0 auto;
   padding: 28px 0 44px;
+  font-size: 14px;
 }
 
 .hero,
@@ -38,7 +39,7 @@
   max-width: 11ch;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.35rem, 4vw, 4.3rem);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
   line-height: 0.96;
   color: #0f172a;
 }
@@ -59,7 +60,7 @@
 
 .heroBrief h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
   line-height: 1.25;
   color: #0f172a;
 }
@@ -97,8 +98,8 @@
 
 .heroCopy {
   max-width: 58ch;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .heroStats {
@@ -120,13 +121,14 @@
 
 .statTile strong {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2vw, 2.15rem);
+  font-size: clamp(1.2rem, 1.7vw, 1.7rem);
   font-weight: 600;
   line-height: 1;
   color: #111827;
 }
 
 .controlBand,
+.analyticsBand,
 .workspace {
   margin-top: 18px;
 }
@@ -242,6 +244,113 @@
   transform: translateY(-1px);
 }
 
+.analyticsBand {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.analyticsCard {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  padding: 16px;
+}
+
+.analyticsHeader h3 {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+.statusChart,
+.progressChart {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.statusRow,
+.progressRow {
+  display: grid;
+  gap: 6px;
+}
+
+.statusMeta,
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.78rem;
+}
+
+.statusMeta strong,
+.progressMeta strong {
+  color: #0f172a;
+}
+
+.statusTrack,
+.progressTrack {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.statusFill,
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.statusFill {
+  background: #94a3b8;
+}
+
+.statusFill[data-status="ACTIVE"] {
+  background: #10b981;
+}
+
+.statusFill[data-status="PENDING"] {
+  background: #f59e0b;
+}
+
+.statusFill[data-status="LAPSED"] {
+  background: #ef4444;
+}
+
+.statusFill[data-status="ALUMNI"] {
+  background: #64748b;
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #0f766e, #2dd4bf);
+}
+
+.trendChart {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.trendSvg {
+  width: 100%;
+  height: 120px;
+  color: #0f766e;
+  padding: 6px 0;
+}
+
+.trendLabels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(52px, 1fr));
+  gap: 8px;
+  font-size: 0.72rem;
+  color: #4b5563;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr) 360px;
@@ -281,7 +390,7 @@
 .paymentSection h3 {
   margin: 6px 0 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
+  font-size: 1.2rem;
   line-height: 1.1;
   color: #0f172a;
 }
@@ -353,7 +462,7 @@
 }
 
 .memberCardHead h3 {
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   line-height: 1.2;
 }
 
@@ -480,6 +589,7 @@
 }
 
 @media (max-width: 1240px) {
+  .analyticsBand,
   .workspace {
     grid-template-columns: 1fr;
   }
@@ -522,6 +632,7 @@
   }
 
   .heroStats,
+  .analyticsBand,
   .profileGrid,
   .paymentForm,
   .editorForm {

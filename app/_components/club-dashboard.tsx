@@ -65,6 +65,42 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
     ? `mailto:?subject=${encodeURIComponent(`Club member record: ${selectedMember.fullName}`)}&body=${encodeURIComponent(buildEmailSummary(selectedMember))}`
     : "mailto:";
 
+  const analytics = useMemo(() => {
+    const statusCounts = statusOptions.map((status) => ({
+      status,
+      count: students.filter((student) => student.membershipStatus === status).length,
+    }));
+
+    const duesProgress = students.map((student) => ({
+      label: student.fullName.split(" ")[0] ?? student.fullName,
+      ratio:
+        student.annualFee > 0
+          ? Math.min(student.totalPaid / student.annualFee, 1)
+          : 0,
+      paid: student.totalPaid,
+    }));
+
+    const recentPayments = students
+      .flatMap((student) =>
+        student.payments.map((payment) => ({
+          amount: payment.amount,
+          paidAt: payment.paidAt,
+        })),
+      )
+      .sort((left, right) => left.paidAt.localeCompare(right.paidAt));
+
+    const paymentTrend = recentPayments.slice(-7).map((payment, index) => ({
+      label: `P${index + 1}`,
+      value: payment.amount,
+    }));
+
+    return {
+      statusCounts,
+      duesProgress,
+      paymentTrend,
+    };
+  }, [students]);
+
   return (
     <div className={styles.shell}>
       <section className={styles.hero}>
@@ -129,6 +165,38 @@ export default function ClubDashboard({ students, stats }: ClubDashboardProps) {
           <button type="button" onClick={() => window.print()}>
             Print
           </button>
+        </div>
+      </section>
+
+      <section className={styles.analyticsBand}>
+        <div className={styles.analyticsCard}>
+          <div className={styles.analyticsHeader}>
+            <div>
+              <p className={styles.panelEyebrow}>Membership mix</p>
+              <h3>Status distribution</h3>
+            </div>
+          </div>
+          <StatusChart data={analytics.statusCounts} total={stats.totalMembers} />
+        </div>
+
+        <div className={styles.analyticsCard}>
+          <div className={styles.analyticsHeader}>
+            <div>
+              <p className={styles.panelEyebrow}>Payment flow</p>
+              <h3>Recent collections</h3>
+            </div>
+          </div>
+          <TrendChart data={analytics.paymentTrend} />
+        </div>
+
+        <div className={styles.analyticsCard}>
+          <div className={styles.analyticsHeader}>
+            <div>
+              <p className={styles.panelEyebrow}>Dues progress</p>
+              <h3>Member fee completion</h3>
+            </div>
+          </div>
+          <ProgressChart data={analytics.duesProgress.slice(0, 6)} />
         </div>
       </section>
 
@@ -541,6 +609,102 @@ function StatTile({ label, value }: { label: string; value: string }) {
     <div className={styles.statTile}>
       <span>{label}</span>
       <strong>{value}</strong>
+    </div>
+  );
+}
+
+function StatusChart({
+  data,
+  total,
+}: {
+  data: { status: string; count: number }[];
+  total: number;
+}) {
+  return (
+    <div className={styles.statusChart}>
+      {data.map((item) => {
+        const width = total > 0 ? Math.max((item.count / total) * 100, item.count ? 8 : 0) : 0;
+
+        return (
+          <div key={item.status} className={styles.statusRow}>
+            <div className={styles.statusMeta}>
+              <span>{item.status}</span>
+              <strong>{item.count}</strong>
+            </div>
+            <div className={styles.statusTrack}>
+              <div
+                className={styles.statusFill}
+                data-status={item.status}
+                style={{ width: `${width}%` }}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TrendChart({
+  data,
+}: {
+  data: { label: string; value: number }[];
+}) {
+  const points = data.length
+    ? data
+        .map((point, index) => {
+          const x = (index / Math.max(data.length - 1, 1)) * 100;
+          const maxValue = Math.max(...data.map((item) => item.value), 1);
+          const y = 100 - (point.value / maxValue) * 80 - 10;
+          return `${x},${y}`;
+        })
+        .join(" ")
+    : "";
+
+  return (
+    <div className={styles.trendChart}>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className={styles.trendSvg}>
+        <polyline
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          points={points}
+        />
+      </svg>
+      <div className={styles.trendLabels}>
+        {data.length > 0 ? (
+          data.map((point) => <span key={point.label}>{formatCurrency(point.value)}</span>)
+        ) : (
+          <span>No payments yet</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ProgressChart({
+  data,
+}: {
+  data: { label: string; ratio: number; paid: number }[];
+}) {
+  return (
+    <div className={styles.progressChart}>
+      {data.map((item) => (
+        <div key={item.label} className={styles.progressRow}>
+          <div className={styles.progressMeta}>
+            <span>{item.label}</span>
+            <strong>{formatCurrency(item.paid)}</strong>
+          </div>
+          <div className={styles.progressTrack}>
+            <div
+              className={styles.progressFill}
+              style={{ width: `${Math.max(item.ratio * 100, item.paid ? 8 : 0)}%` }}
+            />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
