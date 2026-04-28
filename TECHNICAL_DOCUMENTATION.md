@@ -4,7 +4,7 @@
 
 ClubHub is a university club system management web application built to manage student membership records, fee payments, exports, and officer handoff workflows.
 
-The application is designed as a Next.js App Router project with Prisma for data access and SQLite for local persistence. It supports:
+The application is designed as a Next.js App Router project with Prisma for data access and MariaDB/MySQL persistence in deployment. It supports:
 
 - Student member CRUD
 - Search and filtering
@@ -19,7 +19,7 @@ The application is designed as a Next.js App Router project with Prisma for data
 - Frontend: Next.js, React, TypeScript, CSS Modules
 - Backend: Next.js Server Components, Server Actions, Route Handlers
 - ORM: Prisma 7
-- Database: SQLite
+- Database: MariaDB / MySQL
 - Runtime: Node.js
 
 ## Architecture
@@ -225,6 +225,14 @@ Create `.env` from `.env.example`:
 copy .env.example .env
 ```
 
+### Database connection
+
+Set `DATABASE_URL` in `.env`:
+
+```env
+DATABASE_URL="mysql://clubuser:your_password@127.0.0.1:3306/clubhub"
+```
+
 ### Prisma client generation
 
 ```bash
@@ -251,13 +259,13 @@ npm run lint
 npm run build
 ```
 
-## Notes About Prisma and SQLite
+## Notes About Prisma and MariaDB/MySQL
 
-This project uses Prisma 7 with SQLite. The repository includes:
+This project uses Prisma 7 with MariaDB/MySQL-ready configuration. The repository includes:
 
 - `prisma/schema.prisma` for the data model
 - `prisma.config.ts` for datasource configuration
-- `lib/prisma.ts` for the Prisma adapter setup
+- `lib/prisma.ts` for the Prisma client setup
 
 In this environment, Prisma client generation works correctly and the project builds successfully.
 
@@ -312,4 +320,3 @@ The dashboard is organized into three aligned work areas:
 - Keep Prisma access centralized in `lib/`
 - Preserve the 3-column dashboard layout unless the workflow changes
 - Add tests before introducing high-risk shared features
-

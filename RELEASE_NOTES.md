@@ -35,7 +35,7 @@ Initial release of ClubHub, a university club system management application for 
 ### Technical Changes
 
 - Added Prisma 7 integration
-- Added SQLite persistence
+- Added MariaDB/MySQL-ready persistence configuration
 - Added Prisma schema for `StudentMember` and `Payment`
 - Added Server Actions for create, update, delete, and payment recording
 - Added route handler for export operations
@@ -72,4 +72,3 @@ The following checks passed for this release:
 - `README.md`
 - `TECHNICAL_DOCUMENTATION.md`
 - `RELEASE_NOTES.md`
-
